@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Silk Road — by M.S | Luxury Uzbekistan AI Tour Concierge & Inbound Travel</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <!-- Custom Glassmorphic & Silk Road Styles -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            samarkand: {
+              400: '#38bdf8',
+              500: '#0ea5e9',
+              600: '#0284c7',
+              700: '#0369a1',
+              900: '#0c4a6e',
+            },
+            silkGold: {
+              300: '#fde047',
+              400: '#facc15',
+              500: '#eab308',
+              600: '#d97706',
+              700: '#b45309',
+            },
+            khiva: {
+              500: '#ea580c',
+              600: '#c2410c',
+              700: '#9a3412',
+            }
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="min-h-screen flex flex-col bg-slate-950 text-slate-800 relative selection:bg-amber-400 selection:text-slate-950">
+
+  <!-- Ambient Light Orbs for Glass Reflection -->
+  <div class="glow-orb-gold -top-20 -left-20"></div>
+  <div class="glow-orb-azure top-96 -right-20"></div>
+
+  <!-- Top Announcement Bar (Glass Frosted) -->
+  <div class="bg-slate-950/80 backdrop-blur-md text-slate-300 text-xs py-2.5 px-4 border-b border-amber-500/20 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+      
+      <!-- Left: License & Features -->
+      <div class="flex items-center space-x-3 sm:space-x-4">
+        <span class="inline-flex items-center text-amber-300 font-semibold tracking-wide">
+          <i class="fa-solid fa-certificate mr-1.5 text-amber-400 text-xs"></i> 
+          <span data-i18n="top_licensed">Officially Licensed Tour Operator UZB-2024-8841</span>
+        </span>
+        <span class="hidden md:inline text-slate-600">•</span>
+        <span class="hidden md:inline text-slate-300">
+          <i class="fa-solid fa-plane-arrival mr-1.5 text-sky-400"></i> 
+          <span data-i18n="top_international">International Inbound Concierge</span>
+        </span>
+        <span class="hidden lg:inline text-slate-600">•</span>
+        <span class="hidden lg:inline text-amber-200/90 font-medium">
+          <i class="fa-solid fa-sparkles mr-1 text-amber-400"></i> 
+          <span data-i18n="top_cities">Samarkand • Bukhara • Khiva</span>
+        </span>
+      </div>
+
+      <!-- Right: Contacts & Staff Portal -->
+      <div class="flex items-center space-x-3 sm:space-x-4">
+        <a id="topPhone" href="tel:+998712004545" class="hover:text-amber-300 transition-colors flex items-center font-medium">
+          <i class="fa-solid fa-phone mr-1.5 text-amber-400"></i> +998 71 200 45 45
+        </a>
+        <a id="topWhatsapp" href="https://wa.me/998909876543" target="_blank" class="hover:text-emerald-300 text-emerald-400 font-medium transition-colors hidden sm:flex items-center">
+          <i class="fa-brands fa-whatsapp mr-1.5 text-emerald-400"></i> WhatsApp
+        </a>
+
+        <a href="/admin" class="bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 border border-amber-500/40 font-bold px-2.5 py-1 rounded-lg text-xs transition-all flex items-center shadow-sm">
+          <i class="fa-solid fa-lock mr-1.5 text-xs text-amber-400"></i> 
+          <span data-i18n="top_staff_portal">Staff Portal</span>
+        </a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Header & Navigation (Luxury Sticky Bar) -->
+  <header class="bg-slate-900/95 backdrop-blur-xl sticky top-0 z-40 border-b border-white/10 shadow-xl">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+      <!-- Brand Logo & Name -->
+      <a href="/" class="flex items-center space-x-3 group">
+        <div class="brand-logo-gem group-hover:scale-105 transition-transform">
+          <i class="fa-solid fa-mosque text-xl"></i>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="brand-title text-xl sm:text-2xl font-serif">Silk Road</span>
+            <span class="brand-author-badge">by M.S</span>
+          </div>
+          <span class="text-[9px] sm:text-[10px] font-semibold tracking-widest text-slate-400 uppercase block -mt-0.5">
+            Luxury Uzbekistan Travel & AI Concierge
+          </span>
+        </div>
+      </a>
+
+      <!-- Header Action Buttons & High-Contrast Language Selector -->
+      <div class="flex items-center space-x-2 sm:space-x-3">
+        <!-- Global Language Selector Container (High-Contrast, Clean & Always Accessible) -->
+        <div id="langSelectorContainer" class="relative"></div>
+
+        <button onclick="openAgencyModal()" class="px-3 sm:px-3.5 py-2 text-xs sm:text-sm font-semibold text-slate-200 bg-white/10 hover:bg-white/15 border border-white/15 rounded-xl transition-all flex items-center backdrop-blur-md">
+          <i class="fa-solid fa-circle-info mr-1.5 text-amber-400"></i> 
+          <span data-i18n="nav_agency_info">Agency Info</span>
+        </button>
+        <button onclick="document.getElementById('plannerSection').scrollIntoView({behavior: 'smooth'})" class="btn-glass-gold px-3 sm:px-4 py-2 text-xs sm:text-sm font-bold rounded-xl transition-all flex items-center shadow-lg">
+          <i class="fa-solid fa-wand-magic-sparkles mr-1.5 text-amber-200"></i> 
+          <span data-i18n="nav_plan_tour">Plan My Tour</span>
+        </button>
+      </div>
+    </div>
+    <!-- National Uzbek Hoshiya Trim Attached to Header Bottom -->
+    <div class="uzb-hoshiya-trim"></div>
+  </header>
+
+  <!-- Hero Section with Historic Heritage Imagery & Glass Hero Card -->
+  <section class="relative text-white pt-12 pb-20 px-4 overflow-hidden uzb-girih-pattern border-b border-amber-500/10">
+    <div class="max-w-7xl mx-auto relative z-10">
+      
+      <!-- Center Hero Intro -->
+      <div class="max-w-4xl mx-auto text-center mb-12">
+        <div class="inline-flex items-center bg-sky-500/20 border border-sky-400/40 rounded-full px-4 py-1 text-xs font-bold text-sky-200 mb-3 backdrop-blur-md shadow-inner">
+          <span class="mr-2 text-sm">🇺🇿</span> O'zbekiston Milliy Sayyohlik Platformasi • Buyuk Ipak Yo'li
+        </div>
+        <br>
+        <div class="inline-flex items-center bg-amber-400/10 border border-amber-400/30 rounded-full px-4 py-1.5 text-xs font-semibold text-amber-300 mb-6 backdrop-blur-md shadow-inner">
+          <i class="fa-solid fa-star-half-stroke mr-2 text-amber-400"></i> 
+          <span data-i18n="hero_badge">Contracted 3-5★ Partner Hotels • Afrosiyob High-Speed Rail • Certified Guides</span>
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold font-serif tracking-tight leading-tight mb-5">
+          <span data-i18n="hero_title_1">Discover Ancient Uzbekistan</span> <br>
+          <span class="brand-title">Silk Road</span> <span class="brand-author-badge align-middle ml-1">by M.S</span>
+        </h1>
+
+        <p data-i18n="hero_subhead" class="text-slate-300 text-sm sm:text-lg max-w-3xl mx-auto font-light leading-relaxed mb-6">
+          AI-powered bespoke travel planning for international tourists. Share your origin, target budget, and dream cities — we generate verified day-by-day itineraries with exact hotels, train schedules, and transparent costs.
+        </p>
+
+        <!-- Quick Badges -->
+        <div class="flex flex-wrap justify-center items-center gap-2.5 sm:gap-3 text-xs font-medium text-slate-300">
+          <span class="bg-white/10 px-3.5 py-1.5 rounded-full border border-white/10 backdrop-blur-md">
+            <i class="fa-solid fa-train text-amber-400 mr-1.5"></i> 
+            <span data-i18n="hero_bullet_trains">Afrosiyob Bullet Trains</span>
+          </span>
+          <span class="bg-white/10 px-3.5 py-1.5 rounded-full border border-white/10 backdrop-blur-md">
+            <i class="fa-solid fa-plane text-sky-400 mr-1.5"></i> 
+            <span data-i18n="hero_flights">Direct International Flights</span>
+          </span>
+          <span class="bg-white/10 px-3.5 py-1.5 rounded-full border border-white/10 backdrop-blur-md">
+            <i class="fa-solid fa-hotel text-emerald-400 mr-1.5"></i> 
+            <span data-i18n="hero_partner_hotels">Contracted Partner Hotels</span>
+          </span>
+          <span class="bg-white/10 px-3.5 py-1.5 rounded-full border border-white/10 backdrop-blur-md">
+            <i class="fa-solid fa-shield-halved text-amber-400 mr-1.5"></i> 
+            <span data-i18n="hero_guarantee">100% Contractual Guarantee</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- City Heritage Visual Cards (Samarkand, Bukhara, Khiva, Tashkent) -->
+      <div class="mb-4">
+        <div class="flex items-center justify-between mb-4 px-1">
+          <div class="flex items-center space-x-2">
+            <i class="fa-solid fa-monument text-amber-400 text-lg"></i>
+            <h3 data-i18n="city_section_title" class="text-lg font-bold font-serif text-white">Pearls of the Great Silk Road</h3>
+          </div>
+          <span data-i18n="city_section_hint" class="text-xs text-amber-300/80 font-medium hidden sm:inline">
+            <i class="fa-solid fa-hand-pointer mr-1"></i> Click any city to plan a custom tour
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          
+          <!-- Samarkand Card -->
+          <div class="city-showcase-card group" onclick="sendQuickPrompt('Samarkand custom 3-day itinerary focusing on Registan, Gur-e-Amir, and Shah-i-Zinda')">
+            <img src="images/samarkand_registan.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=1200&q=80'" alt="Samarkand Registan Square" loading="eager">
+            <div class="city-showcase-overlay">
+              <span data-i18n="city_samarkand_badge" class="text-[10px] uppercase font-bold tracking-wider text-amber-300 bg-amber-950/70 border border-amber-400/40 px-2 py-0.5 rounded-md w-max mb-1 backdrop-blur-sm">
+                UNESCO World Heritage
+              </span>
+              <h4 data-i18n="city_samarkand_name" class="text-lg font-bold font-serif text-white group-hover:text-amber-300 transition-colors">
+                Samarkand
+              </h4>
+              <p data-i18n="city_samarkand_desc" class="text-[11px] text-slate-300 line-clamp-2">
+                Registan Square, Gur-e-Amir, Bibi-Khanym & the stunning azure domes of Shah-i-Zinda.
+              </p>
+            </div>
+          </div>
+
+          <!-- Bukhara Card -->
+          <div class="city-showcase-card group" onclick="sendQuickPrompt('Bukhara 2-day historical tour covering Kalyan Minaret, Ark fortress, and Lyabi Hauz')">
+            <img src="images/bukhara_kalyan.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1528702748617-c64d49f918af?auto=format&fit=crop&w=1200&q=80'" alt="Bukhara Po-i Kalyan" loading="eager">
+            <div class="city-showcase-overlay">
+              <span data-i18n="city_bukhara_badge" class="text-[10px] uppercase font-bold tracking-wider text-amber-300 bg-amber-950/70 border border-amber-400/40 px-2 py-0.5 rounded-md w-max mb-1 backdrop-blur-sm">
+                2,500 Years of History
+              </span>
+              <h4 data-i18n="city_bukhara_name" class="text-lg font-bold font-serif text-white group-hover:text-amber-300 transition-colors">
+                Bukhara
+              </h4>
+              <p data-i18n="city_bukhara_desc" class="text-[11px] text-slate-300 line-clamp-2">
+                Po-i Kalyan minaret, the ancient Ark fortress, Lyabi Hauz & domed trading bazaars.
+              </p>
+            </div>
+          </div>
+
+          <!-- Khiva Card -->
+          <div class="city-showcase-card group" onclick="sendQuickPrompt('Khiva tour itinerary covering Itchan Kala citadel, Kalta Minor, and ancient palaces')">
+            <img src="images/khiva_itchankala.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1569154941061-e231b4725ef1?auto=format&fit=crop&w=1200&q=80'" alt="Khiva Itchan Kala" loading="eager">
+            <div class="city-showcase-overlay">
+              <span data-i18n="city_khiva_badge" class="text-[10px] uppercase font-bold tracking-wider text-amber-300 bg-amber-950/70 border border-amber-400/40 px-2 py-0.5 rounded-md w-max mb-1 backdrop-blur-sm">
+                Living Open-Air Museum
+              </span>
+              <h4 data-i18n="city_khiva_name" class="text-lg font-bold font-serif text-white group-hover:text-amber-300 transition-colors">
+                Khiva
+              </h4>
+              <p data-i18n="city_khiva_desc" class="text-[11px] text-slate-300 line-clamp-2">
+                Itchan Kala royal palaces, Kalta Minor, and ancient mud-brick fortress citadel walls.
+              </p>
+            </div>
+          </div>
+
+          <!-- Tashkent Card -->
+          <div class="city-showcase-card group" onclick="sendQuickPrompt('Tashkent city tour with Hazrati Imam, Chorsu Bazaar, and Metro discovery')">
+            <img src="images/tashkent_chorsu.jpg" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1577717903315-1691ae25ab3f?auto=format&fit=crop&w=1200&q=80'" alt="Tashkent Chorsu Bazaar" loading="eager">
+            <div class="city-showcase-overlay">
+              <span data-i18n="city_tashkent_badge" class="text-[10px] uppercase font-bold tracking-wider text-sky-300 bg-sky-950/70 border border-sky-400/40 px-2 py-0.5 rounded-md w-max mb-1 backdrop-blur-sm">
+                Capital & Modern Rail Hub
+              </span>
+              <h4 data-i18n="city_tashkent_name" class="text-lg font-bold font-serif text-white group-hover:text-sky-300 transition-colors">
+                Tashkent
+              </h4>
+              <p data-i18n="city_tashkent_desc" class="text-[11px] text-slate-300 line-clamp-2">
+                Hazrati Imam holy Quran complex, legendary Chorsu bazaar & Tashkent ornate Metro.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <div class="uzb-hoshiya-trim"></div>
+
+  <!-- Main Interactive Planner Section (Glassmorphism Container) -->
+  <main id="plannerSection" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 -mt-10 relative z-20 w-full">
+    
+    <!-- Ultra-Modern Glass Planner Box -->
+    <div class="glass-panel-light rounded-3xl overflow-hidden mb-12 shadow-2xl border border-white/60">
+      
+      <!-- Tabs Switcher (Frosted Glass Header) -->
+      <div class="flex border-b border-slate-200/80 bg-slate-100/70 p-2.5 backdrop-blur-md">
+        <button id="tabChatBtn" onclick="switchPlannerTab('chat')" class="flex-1 py-3 px-4 rounded-2xl font-bold text-xs sm:text-sm transition-all flex items-center justify-center space-x-2 bg-white text-samarkand-700 shadow-md border border-slate-200/80">
+          <i class="fa-solid fa-robot text-base text-samarkand-600"></i>
+          <span data-i18n="tab_ai_chat">AI Tour Concierge Chat</span>
+          <span data-i18n="tab_ai_live" class="bg-samarkand-100 text-samarkand-800 text-[10px] px-2 py-0.5 rounded-full font-extrabold ml-1 animate-pulse">Live</span>
+        </button>
+        <button id="tabFormBtn" onclick="switchPlannerTab('form')" class="flex-1 py-3 px-4 rounded-2xl font-semibold text-xs sm:text-sm transition-all flex items-center justify-center space-x-2 text-slate-600 hover:text-slate-900">
+          <i class="fa-solid fa-sliders text-base text-amber-600"></i>
+          <span data-i18n="tab_wizard">Custom Tour Builder (Wizard)</span>
+        </button>
+      </div>
+
+      <!-- Tab Content: AI Chat (Framed in Luxury Smartphone Mockup) -->
+      <div id="tabChatContent" class="py-4 sm:py-6 px-2 sm:px-4">
+        
+        <!-- Smartphone Mockup Wrapper -->
+        <div class="max-w-[430px] sm:max-w-[450px] mx-auto">
+          
+          <!-- Outer Phone Frame (Bezel + Edge Shadows) -->
+          <div class="smartphone-frame bg-slate-900 rounded-[44px] p-2.5 sm:p-3 border-[3px] border-slate-700 shadow-2xl relative">
+            
+            <!-- Screen Glass Area -->
+            <div class="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 rounded-[36px] overflow-hidden border border-white/10 flex flex-col relative text-slate-100 shadow-inner">
+              
+              <!-- Phone Status Bar with Dynamic Island -->
+              <div class="pt-2 px-5 pb-1.5 flex items-center justify-between text-[11px] text-slate-300 select-none bg-slate-950/90 backdrop-blur-md border-b border-white/5">
+                <span class="font-semibold tracking-tight font-mono text-[11px] text-slate-200">09:41</span>
+                
+                <!-- Dynamic Island Notch Pill -->
+                <div class="w-24 h-4 bg-black rounded-full border border-white/15 flex items-center justify-center space-x-1.5 shadow-inner">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  <span class="text-[8px] text-slate-400 font-mono tracking-widest uppercase">AI LIVE</span>
+                </div>
+
+                <div class="flex items-center space-x-1.5 text-[10px] text-slate-400">
+                  <i class="fa-solid fa-signal text-[9px]"></i>
+                  <span class="text-[9px] font-bold text-slate-300">5G</span>
+                  <i class="fa-solid fa-wifi text-[9px]"></i>
+                  <i class="fa-solid fa-battery-full text-emerald-400 text-[11px]"></i>
+                </div>
+              </div>
+
+              <!-- Phone App Header (Silk Road Concierge Verified Bar) -->
+              <div class="px-3.5 py-2.5 bg-slate-900/95 border-b border-white/10 backdrop-blur-xl flex items-center justify-between">
+                <div class="flex items-center space-x-2.5">
+                  <div class="w-9 h-9 rounded-2xl gold-gradient flex items-center justify-center text-white shadow-md flex-shrink-0">
+                    <i class="fa-solid fa-mosque text-sm"></i>
+                  </div>
+                  <div>
+                    <div class="flex items-center space-x-1.5">
+                      <h3 class="text-xs font-bold text-white font-serif tracking-tight">Silk Road Concierge</h3>
+                      <i class="fa-solid fa-certificate text-[10px] text-sky-400" title="Verified Travel AI"></i>
+                    </div>
+                    <div class="flex items-center space-x-1 text-[10px] text-emerald-400">
+                      <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-ping"></span>
+                      <span data-i18n="chat_welcome_status">Online • Instant Tour Planner</span>
+                    </div>
+                  </div>
+                </div>
+                <button onclick="openAgencyModal()" class="w-7 h-7 rounded-full bg-white/10 hover:bg-white/20 text-amber-300 flex items-center justify-center text-xs transition-colors" title="Agency Info">
+                  <i class="fa-solid fa-circle-info"></i>
+                </button>
+              </div>
+
+              <!-- Chat History Window (Compact Height: min-h-[380px] max-h-[460px]) -->
+              <div id="chatHistory" class="p-3 space-y-3 min-h-[380px] max-h-[460px] overflow-y-auto scroll-smooth bg-gradient-to-b from-slate-900/40 via-slate-950/40 to-slate-900/50">
+                
+                <!-- Initial AI message -->
+                <div class="flex items-start space-x-2.5">
+                  <div class="w-7 h-7 rounded-xl gold-gradient text-white flex items-center justify-center text-[10px] flex-shrink-0 shadow-sm mt-0.5">
+                    <i class="fa-solid fa-sparkles"></i>
+                  </div>
+                  <div id="chatWelcomeBubble" class="chat-bubble-ai p-3 rounded-2xl max-w-[90%] text-xs leading-relaxed shadow-sm">
+                    <div class="flex items-center justify-between mb-1 pb-1 border-b border-slate-100">
+                      <span class="font-bold text-slate-900 font-serif flex items-center text-xs">
+                        Silk Road <span class="brand-author-badge !text-[8px] ml-1.5">by M.S</span>
+                      </span>
+                      <span class="text-[9px] bg-emerald-100 text-emerald-800 px-1.5 py-0.5 rounded-full font-bold">
+                        ● <span data-i18n="chat_welcome_status">Online</span>
+                      </span>
+                    </div>
+                    <p data-i18n="chat_welcome_greet" class="text-slate-700 mb-1.5">
+                      Assalomu alaykum and welcome! I am your AI tour concierge for Uzbekistan. Tell me:
+                    </p>
+                    <ul class="list-disc list-inside space-y-0.5 text-slate-600 mb-2 text-[11px]">
+                      <li data-i18n="chat_welcome_q1">Where are you traveling from? (e.g. Turkey, UK, Germany, USA...)</li>
+                      <li data-i18n="chat_welcome_q2">What is your approximate budget? (e.g. $1,500, $2,000, $3,000)</li>
+                      <li data-i18n="chat_welcome_q3">Which cities do you wish to explore? (Tashkent, Samarkand, Bukhara, Khiva)</li>
+                      <li data-i18n="chat_welcome_q4">How many days do you have? (e.g. 5, 7, 8, 10 days)</li>
+                    </ul>
+                    <p data-i18n="chat_welcome_foot" class="text-slate-700 text-[11px]">
+                      I will instantly generate 3 complete tour packages with our contracted hotels, high-speed rail, and exact costs!
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Horizontal Swipeable Quick Prompts -->
+              <div class="px-3 py-2 bg-slate-950/80 border-t border-white/5 flex items-center space-x-2 overflow-x-auto no-scrollbar">
+                <button onclick="sendQuickPrompt('O\'zbekiston bo\'ylab 7 kunlik klassik Samarqand, Buxoro va Xiva sayohati rejasini tuzib ber, byudjet $2000')" class="text-[11px] whitespace-nowrap bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 font-semibold px-2.5 py-1 rounded-full border border-emerald-400/30 transition-all flex-shrink-0">
+                  🇺🇿 Samarqand, Buxoro, Xiva (7 kun)
+                </button>
+                <button onclick="sendQuickPrompt('We are 2 travelers from Turkey, want roundtrip Istanbul flights, visiting Tashkent, Samarkand and Bukhara for 7 days, budget $2500')" class="text-[11px] whitespace-nowrap bg-amber-500/20 hover:bg-amber-500/30 text-amber-300 font-semibold px-2.5 py-1 rounded-full border border-amber-400/30 transition-all flex-shrink-0">
+                  <span data-i18n="chat_prompt_turkey">🇹🇷 Turkey ($2500)</span>
+                </button>
+                <button onclick="sendQuickPrompt('I am from the UK, my budget is $2000. I want to visit Tashkent, Samarkand, and Khiva for 7 days.')" class="text-[11px] whitespace-nowrap bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium px-2.5 py-1 rounded-full border border-white/10 transition-all flex-shrink-0">
+                  <span data-i18n="chat_prompt_uk">🇬🇧 UK ($2000)</span>
+                </button>
+                <button onclick="sendQuickPrompt('We are from Germany, budget $2800, want to explore Samarkand, Bukhara, and Khiva for 8 days')" class="text-[11px] whitespace-nowrap bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium px-2.5 py-1 rounded-full border border-white/10 transition-all flex-shrink-0">
+                  <span data-i18n="chat_prompt_germany">🇩🇪 Germany ($2800)</span>
+                </button>
+                <button onclick="sendQuickPrompt('Tell me about your agency, office address, and contact numbers.')" class="text-[11px] whitespace-nowrap bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium px-2.5 py-1 rounded-full border border-white/10 transition-all flex-shrink-0">
+                  <span data-i18n="chat_prompt_agency">📞 Contacts</span>
+                </button>
+              </div>
+
+              <!-- Phone Bottom Messenger Input Bar -->
+              <div class="p-2.5 bg-slate-900 border-t border-white/10">
+                <form id="chatForm" onsubmit="handleChatSubmit(event)" class="flex items-center space-x-2">
+                  <div class="relative flex-1">
+                    <input
+                      id="chatInput"
+                      type="text"
+                      data-i18n-placeholder="chat_input_placeholder"
+                      placeholder="Savol yoki sayohat rejangizni yozing..."
+                      class="w-full pl-3 pr-8 py-2.5 bg-slate-800 text-white placeholder-slate-400 text-xs rounded-full border border-white/10 focus:border-amber-400 focus:outline-none transition-all"
+                      autocomplete="off"
+                    />
+                    <span class="absolute right-3 top-2.5 text-amber-400/80 text-xs pointer-events-none">
+                      <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    </span>
+                  </div>
+                  <button
+                    type="submit"
+                    id="sendBtn"
+                    class="w-9 h-9 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 text-slate-950 font-bold flex items-center justify-center shadow-lg transition-all flex-shrink-0 active:scale-95"
+                    title="Yuborish"
+                  >
+                    <i class="fa-solid fa-paper-plane text-xs"></i>
+                  </button>
+                </form>
+
+                <!-- Micro Home Gesture Indicator -->
+                <div class="mt-2 flex justify-center">
+                  <div class="w-32 h-1 bg-white/25 rounded-full"></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tab Content: Wizard Form -->
+      <div id="tabFormContent" class="p-6 sm:p-8 hidden">
+        <form onsubmit="handleWizardSubmit(event)" class="space-y-6">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <!-- Origin -->
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                <i class="fa-solid fa-globe text-sky-600 mr-1.5"></i> 
+                <span data-i18n="wiz_origin_label">Your Country of Origin</span>
+              </label>
+              <input
+                id="wizardOrigin"
+                type="text"
+                data-i18n-placeholder="wiz_origin_ph"
+                placeholder="E.g. United Kingdom, Germany, Turkey, USA"
+                value="United Kingdom"
+                class="w-full px-4 py-3 glass-input rounded-xl text-sm font-semibold"
+                required
+              />
+            </div>
+
+            <!-- Budget -->
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                <i class="fa-solid fa-dollar-sign text-emerald-600 mr-1.5"></i> 
+                <span data-i18n="wiz_budget_label">Total Travel Budget (USD)</span>
+              </label>
+              <div class="relative">
+                <span class="absolute left-3.5 top-3 text-slate-400 font-bold">$</span>
+                <input
+                  id="wizardBudget"
+                  type="number"
+                  min="300"
+                  max="50000"
+                  step="50"
+                  value="2500"
+                  class="w-full pl-8 pr-4 py-3 glass-input rounded-xl text-sm font-bold text-slate-900"
+                  required
+                />
+              </div>
+            </div>
+
+            <!-- Duration -->
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+                <i class="fa-solid fa-calendar-days text-amber-600 mr-1.5"></i> 
+                <span data-i18n="wiz_duration_label">Duration (Days)</span>
+              </label>
+              <select id="wizardDuration" class="w-full px-4 py-3 glass-input rounded-xl text-sm font-semibold">
+                <option value="5" data-i18n="wiz_dur_5">5 Days (Express Silk Road)</option>
+                <option value="7" selected data-i18n="wiz_dur_7">7 Days (Classic Golden Route)</option>
+                <option value="8" data-i18n="wiz_dur_8">8 Days (Samarkand, Bukhara, Khiva)</option>
+                <option value="10" data-i18n="wiz_dur_10">10 Days (Comprehensive Discovery)</option>
+                <option value="12" data-i18n="wiz_dur_12">12 Days (Grand Silk Road Expedition)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Cities Selection -->
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-3">
+              <i class="fa-solid fa-map-location-dot text-indigo-600 mr-1.5"></i> 
+              <span data-i18n="wiz_cities_label">Choose Cities to Visit</span>
+            </label>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
+              <label class="flex items-center p-3.5 bg-white/70 border border-slate-200 rounded-2xl cursor-pointer hover:bg-sky-50/70 hover:border-sky-300 transition-all shadow-sm">
+                <input type="checkbox" name="wizardCities" value="Tashkent" checked class="w-4 h-4 text-sky-600 rounded focus:ring-sky-500 mr-3">
+                <div>
+                  <span data-i18n="wiz_city_tas" class="font-bold text-sm text-slate-900 block">Tashkent</span>
+                  <span data-i18n="wiz_city_tas_sub" class="text-[11px] text-slate-500">Capital & Rail Hub</span>
+                </div>
+              </label>
+              <label class="flex items-center p-3.5 bg-white/70 border border-slate-200 rounded-2xl cursor-pointer hover:bg-sky-50/70 hover:border-sky-300 transition-all shadow-sm">
+                <input type="checkbox" name="wizardCities" value="Samarkand" checked class="w-4 h-4 text-sky-600 rounded focus:ring-sky-500 mr-3">
+                <div>
+                  <span data-i18n="wiz_city_sam" class="font-bold text-sm text-slate-900 block">Samarkand</span>
+                  <span data-i18n="wiz_city_sam_sub" class="text-[11px] text-slate-500">Registan & Blue Domes</span>
+                </div>
+              </label>
+              <label class="flex items-center p-3.5 bg-white/70 border border-slate-200 rounded-2xl cursor-pointer hover:bg-sky-50/70 hover:border-sky-300 transition-all shadow-sm">
+                <input type="checkbox" name="wizardCities" value="Bukhara" checked class="w-4 h-4 text-sky-600 rounded focus:ring-sky-500 mr-3">
+                <div>
+                  <span data-i18n="wiz_city_bux" class="font-bold text-sm text-slate-900 block">Bukhara</span>
+                  <span data-i18n="wiz_city_bux_sub" class="text-[11px] text-slate-500">Kalyan Minaret & Ark</span>
+                </div>
+              </label>
+              <label class="flex items-center p-3.5 bg-white/70 border border-slate-200 rounded-2xl cursor-pointer hover:bg-sky-50/70 hover:border-sky-300 transition-all shadow-sm">
+                <input type="checkbox" name="wizardCities" value="Khiva" checked class="w-4 h-4 text-sky-600 rounded focus:ring-sky-500 mr-3">
+                <div>
+                  <span data-i18n="wiz_city_khi" class="font-bold text-sm text-slate-900 block">Khiva</span>
+                  <span data-i18n="wiz_city_khi_sub" class="text-[11px] text-slate-500">Itchan Kala Citadel</span>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <!-- Service Add-ons & Flights & Guide Options -->
+          <div class="p-5 bg-white/60 border border-slate-200/80 rounded-2xl space-y-4 backdrop-blur-md">
+            <span data-i18n="wiz_addons_title" class="text-xs font-bold uppercase tracking-wider text-slate-800 block flex items-center">
+              <i class="fa-solid fa-wand-magic-sparkles text-amber-600 mr-2"></i> Special Services & Flight Configuration
+            </span>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <!-- Flight toggle -->
+              <label class="flex items-start p-3.5 bg-white border border-slate-200 rounded-xl cursor-pointer hover:border-sky-400 transition-colors shadow-sm">
+                <input id="wizardIncludeFlight" type="checkbox" checked class="w-4 h-4 text-sky-600 rounded focus:ring-sky-500 mt-1 mr-3">
+                <div>
+                  <span data-i18n="wiz_flight_label" class="font-bold text-sm text-slate-900 block flex items-center">
+                    <i class="fa-solid fa-plane-departure text-sky-600 mr-1.5"></i> Include Roundtrip International Flights (from origin)
+                  </span>
+                  <span data-i18n="wiz_flight_sub" class="text-xs text-slate-500">Uzbekistan Airways & Global Partners (Scheduled direct flights with 30kg+ luggage included)</span>
+                </div>
+              </label>
+
+              <!-- Guide toggle & language -->
+              <div class="p-3.5 bg-white border border-slate-200 rounded-xl space-y-2 shadow-sm">
+                <label class="flex items-center cursor-pointer">
+                  <input id="wizardIncludeGuide" type="checkbox" checked class="w-4 h-4 text-sky-600 rounded focus:ring-sky-500 mr-2.5">
+                  <span data-i18n="wiz_guide_label" class="font-bold text-sm text-slate-900 flex items-center">
+                    <i class="fa-solid fa-user-tie text-amber-600 mr-1.5"></i> Certified Professional Tour Guide
+                  </span>
+                </label>
+                <div class="flex items-center space-x-2 text-xs">
+                  <span data-i18n="wiz_guide_lang_label" class="text-slate-500">Guide Language:</span>
+                  <select id="wizardGuideLang" class="px-3 py-1 border border-slate-300 rounded-lg text-xs font-semibold">
+                    <option value="English" selected>English</option>
+                    <option value="Turkish">Türkçe</option>
+                    <option value="Russian">Русский</option>
+                    <option value="German">Deutsch</option>
+                    <option value="French">Français</option>
+                    <option value="Spanish">Español</option>
+                    <option value="Arabic">العربية</option>
+                    <option value="Chinese">中文</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Visa-free badge for Turkey & foreign guests -->
+            <div class="flex items-center space-x-2.5 p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-950 font-medium">
+              <i class="fa-solid fa-passport text-emerald-700 text-base flex-shrink-0"></i>
+              <span data-i18n="wiz_visa_notice">Visa-Free Guarantee: Citizens of Turkey, EU, UK, and 90+ countries enjoy 30 days visa-free entry to Uzbekistan!</span>
+            </div>
+          </div>
+
+          <div class="flex justify-end pt-2">
+            <button type="submit" class="w-full sm:w-auto px-8 py-3.5 btn-glass-azure rounded-xl font-bold shadow-lg transition-all flex items-center justify-center space-x-2">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span data-i18n="wiz_generate_btn">Generate Customized Tour Proposals</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Generated Tour Proposals Section -->
+    <div id="resultsSection" class="hidden space-y-8">
+      <div class="text-center max-w-3xl mx-auto">
+        <span class="text-xs font-bold uppercase tracking-wider text-amber-300 bg-amber-950/70 border border-amber-400/40 px-3.5 py-1 rounded-full backdrop-blur-md">
+          <i class="fa-solid fa-check-circle mr-1 text-amber-400"></i> 
+          <span data-i18n="res_ready_badge">Tailored Proposals Ready</span>
+        </span>
+        <h2 data-i18n="res_heading" class="text-2xl sm:text-4xl font-extrabold font-serif text-white mt-3">
+          Compare Your 3 Personalized Silk Road Packages
+        </h2>
+        <p data-i18n="res_sub" class="text-slate-300 text-sm mt-2 font-light">
+          Each package includes officially contracted partner hotels, high-speed rail, detailed hour-by-hour schedules, and exact costs. Click "Book This Tour / Contact Operator" on the one you love!
+        </p>
+      </div>
+
+      <!-- Packages Container (3 Cards Grid) -->
+      <div id="packagesContainer" class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- Rendered dynamically via app.js -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- National Hospitality & Authentic Heritage Section -->
+  <section class="bg-slate-900/60 backdrop-blur-xl border-t border-white/10 py-14 px-4 mt-auto text-white">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+      
+      <div class="glass-panel-dark p-6 rounded-2xl flex items-start space-x-4">
+        <div class="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center text-xl flex-shrink-0 border border-amber-500/30">
+          <i class="fa-solid fa-handshake"></i>
+        </div>
+        <div>
+          <h4 data-i18n="trust_hotel_title" class="font-bold font-serif text-white text-base mb-1">Contracted Partner Hotels</h4>
+          <p data-i18n="trust_hotel_desc" class="text-slate-300 text-xs sm:text-sm leading-relaxed font-light">
+            All hotels across Samarkand, Bukhara, Khiva, and Tashkent have active contracts with our agency. Star ratings and prime historical locations guaranteed.
+          </p>
+        </div>
+      </div>
+
+      <div class="glass-panel-dark p-6 rounded-2xl flex items-start space-x-4">
+        <div class="w-12 h-12 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center text-xl flex-shrink-0 border border-sky-500/30">
+          <i class="fa-solid fa-train-subway"></i>
+        </div>
+        <div>
+          <h4 data-i18n="trust_train_title" class="font-bold font-serif text-white text-base mb-1">Guaranteed Afrosiyob Bullet Train Tickets</h4>
+          <p data-i18n="trust_train_desc" class="text-slate-300 text-xs sm:text-sm leading-relaxed font-light">
+            High-speed rail tickets in Uzbekistan sell out weeks in advance. As an authorized national rail partner, we secure VIP, Business, or Economy seats ahead of time.
+          </p>
+        </div>
+      </div>
+
+      <div class="glass-panel-dark p-6 rounded-2xl flex items-start space-x-4">
+        <div class="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl flex-shrink-0 border border-emerald-500/30">
+          <i class="fa-solid fa-utensils"></i>
+        </div>
+        <div>
+          <h4 data-i18n="trust_hospitality_title" class="font-bold font-serif text-white text-base mb-1">Authentic Uzbek Hospitality</h4>
+          <p data-i18n="trust_hospitality_desc" class="text-slate-300 text-xs sm:text-sm leading-relaxed font-light">
+            Experience genuine Silk Road culinary delights: Samarkand plov, Gijduvan shashlik, Khiva shivit oshi, and private visits to master artisan workshops.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer (Glass Dark) -->
+  <footer class="bg-slate-950 text-slate-400 py-10 px-4 text-xs border-t border-amber-500/20">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+      
+      <div class="flex items-center space-x-3.5">
+        <div class="brand-logo-gem !w-10 !h-10 !rounded-xl">
+          <i class="fa-solid fa-mosque text-base"></i>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="brand-title text-xl font-serif">Silk Road</span>
+            <span class="brand-author-badge !text-[9px]">by M.S</span>
+          </div>
+          <span class="text-slate-500 text-[11px] block mt-0.5">Samarkand • Bukhara • Khiva • Tashkent</span>
+        </div>
+      </div>
+
+      <div class="text-center md:text-right">
+        <p data-i18n="footer_operator_info" class="text-slate-300 font-semibold">
+          Licensed Silk Road Inbound Tour Operator • License #T-UZB-2024-8841
+        </p>
+        <p data-i18n="footer_rights" class="text-slate-500 mt-1">
+          © 2026 Silk Road — by M.S. All rights reserved.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Booking Inquiry Modal ("Adminga Murojaat Qilish") -->
+  <div id="bookingModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto">
+    <div class="glass-panel-light rounded-3xl shadow-2xl border border-white/80 max-w-lg w-full p-6 sm:p-7 modal-enter relative my-8 text-slate-800">
+      
+      <!-- Close button -->
+      <button onclick="closeBookingModal()" class="absolute right-4 top-4 text-slate-400 hover:text-slate-700 p-1.5 rounded-lg transition-colors">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <div class="flex items-center space-x-3 mb-4">
+        <div class="w-11 h-11 rounded-xl bg-sky-100 text-sky-700 flex items-center justify-center text-lg flex-shrink-0 shadow-inner">
+          <i class="fa-solid fa-paper-plane"></i>
+        </div>
+        <div>
+          <h3 data-i18n="book_modal_title" class="text-lg font-bold font-serif text-slate-900">Book This Tour / Contact Operator</h3>
+          <p data-i18n="book_modal_sub" class="text-xs text-slate-500">Submit proposal to agency staff for final confirmation</p>
+        </div>
+      </div>
+
+      <!-- Package Summary Pill -->
+      <div class="bg-white/80 border border-slate-200/90 rounded-2xl p-4 mb-5 text-xs space-y-2 shadow-sm">
+        <div class="flex justify-between items-center">
+          <span data-i18n="book_sum_pkg" class="text-slate-500">Selected Tour Package:</span>
+          <span id="modalPackageTitle" class="font-bold text-slate-900">Silk Road Heritage & Comfort</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span data-i18n="book_sum_code" class="text-slate-500">Tour ID Code:</span>
+          <span id="modalTourCode" class="font-mono font-bold text-sky-700 bg-sky-50 px-2.5 py-0.5 rounded-md border border-sky-200">UZB-2026-X891</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span data-i18n="book_sum_price" class="text-slate-500">Total Price:</span>
+          <span id="modalTotalPrice" class="font-bold text-emerald-700 text-sm">$1,280 USD</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span data-i18n="book_sum_route" class="text-slate-500">Route:</span>
+          <span id="modalCities" class="font-semibold text-slate-700">Tashkent ➔ Samarkand ➔ Khiva</span>
+        </div>
+        <div class="pt-2 border-t border-slate-200">
+          <span data-i18n="book_sum_hotels" class="text-slate-400 block text-[10px] mb-1">Selected Hotels & Rooms:</span>
+          <div id="modalHotelsSummary" class="text-slate-700 font-medium text-[11px] space-y-0.5"></div>
+        </div>
+      </div>
+
+      <!-- Booking Form -->
+      <form id="bookingForm" onsubmit="handleBookingSubmit(event)" class="space-y-4 text-xs sm:text-sm">
+        <div>
+          <label data-i18n="book_lbl_name" class="block font-bold text-slate-700 mb-1">Full Name *</label>
+          <input
+            id="bookName"
+            type="text"
+            required
+            data-i18n-placeholder="book_ph_name"
+            placeholder="E.g. John Smith or Ahmet Yilmaz"
+            class="w-full px-4 py-2.5 glass-input rounded-xl focus:outline-none"
+          />
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label data-i18n="book_lbl_country" class="block font-bold text-slate-700 mb-1">Country of Origin *</label>
+            <input
+              id="bookCountry"
+              type="text"
+              required
+              placeholder="E.g. United Kingdom, Germany, Turkey"
+              class="w-full px-4 py-2.5 glass-input rounded-xl focus:outline-none"
+            />
+          </div>
+          <div>
+            <label data-i18n="book_lbl_email" class="block font-bold text-slate-700 mb-1">Email Address *</label>
+            <input
+              id="bookEmail"
+              type="email"
+              required
+              placeholder="email@example.com"
+              class="w-full px-4 py-2.5 glass-input rounded-xl focus:outline-none"
+            />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          <div>
+            <label data-i18n="book_lbl_phone" class="block font-bold text-slate-700 mb-1">Phone / WhatsApp *</label>
+            <input
+              id="bookPhone"
+              type="tel"
+              required
+              placeholder="+44 7911 123456"
+              class="w-full px-4 py-2.5 glass-input rounded-xl focus:outline-none"
+            />
+          </div>
+          <div>
+            <label data-i18n="book_lbl_travelers" class="block font-bold text-slate-700 mb-1">Number of Travelers</label>
+            <input
+              id="bookTravelers"
+              type="number"
+              min="1"
+              max="20"
+              value="2"
+              class="w-full px-4 py-2.5 glass-input rounded-xl focus:outline-none font-semibold"
+            />
+          </div>
+        </div>
+
+        <div>
+          <label data-i18n="book_lbl_requests" class="block font-bold text-slate-700 mb-1">Target Dates & Special Requests</label>
+          <textarea
+            id="bookRequests"
+            rows="2"
+            data-i18n-placeholder="book_ph_requests"
+            placeholder="E.g., Vegetarian meal preference, preferred arrival date, need airport pickup..."
+            class="w-full px-4 py-2 glass-input rounded-xl focus:outline-none"
+          ></textarea>
+        </div>
+
+        <div class="pt-2">
+          <button
+            type="submit"
+            id="bookSubmitBtn"
+            class="w-full py-3.5 btn-glass-azure rounded-xl text-white font-bold shadow-md transition-all flex items-center justify-center space-x-2"
+          >
+            <i class="fa-solid fa-check"></i>
+            <span data-i18n="book_submit_btn">Submit Booking Inquiry</span>
+          </button>
+          <p data-i18n="book_no_payment_note" class="text-[11px] text-slate-500 text-center mt-2.5">
+            No upfront payment required. Our travel manager will contact you within 15 minutes.
+          </p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Agency Info Modal -->
+  <div id="agencyModal" class="fixed inset-0 z-50 bg-slate-950/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+    <div class="glass-panel-light rounded-3xl shadow-2xl border border-white/80 max-w-lg w-full p-6 sm:p-7 modal-enter relative text-slate-800">
+      <button onclick="closeAgencyModal()" class="absolute right-4 top-4 text-slate-400 hover:text-slate-700 p-1.5 rounded-lg transition-colors">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+
+      <div class="flex items-center space-x-3.5 mb-4">
+        <div class="brand-logo-gem !w-11 !h-11 !rounded-xl">
+          <i class="fa-solid fa-landmark text-lg"></i>
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <h3 id="modalAgencyName" class="text-xl font-bold font-serif text-slate-900">Silk Road</h3>
+            <span class="brand-author-badge !text-[9px]">by M.S</span>
+          </div>
+          <span id="modalAgencyLicense" data-i18n="agency_modal_license" class="text-xs text-amber-800 font-semibold bg-amber-50 px-2.5 py-0.5 rounded-md border border-amber-200 inline-block mt-0.5">
+            License: T-UZB-2024-8841
+          </span>
+        </div>
+      </div>
+
+      <p id="modalAgencyAbout" class="text-xs sm:text-sm text-slate-600 mb-4 leading-relaxed"></p>
+
+      <div class="space-y-3 text-xs border-t border-slate-200/80 pt-4">
+        <div class="flex items-center space-x-2.5 text-slate-700">
+          <i class="fa-solid fa-phone text-sky-600 w-5"></i>
+          <span data-i18n="agency_phone_lbl" class="font-bold">Phone:</span>
+          <span id="modalAgencyPhone">+998 71 200 45 45</span>
+        </div>
+        <div class="flex items-center space-x-2.5 text-slate-700">
+          <i class="fa-brands fa-whatsapp text-emerald-600 w-5 text-sm"></i>
+          <span data-i18n="agency_whatsapp_lbl" class="font-bold">WhatsApp:</span>
+          <span id="modalAgencyWhatsapp">+998 90 987 65 43</span>
+        </div>
+        <div class="flex items-center space-x-2.5 text-slate-700">
+          <i class="fa-solid fa-envelope text-amber-600 w-5"></i>
+          <span data-i18n="agency_email_lbl" class="font-bold">Email:</span>
+          <span id="modalAgencyEmail">contact@silkroad-ms.uz</span>
+        </div>
+        <div class="flex items-start space-x-2.5 text-slate-700">
+          <i class="fa-solid fa-location-dot text-rose-500 w-5 mt-0.5"></i>
+          <div>
+            <span data-i18n="agency_office_lbl" class="font-bold">Headquarters:</span>
+            <span id="modalAgencyAddress">14 Amir Temur Avenue, Tashkent, Uzbekistan</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/i18n.js"></script>
+  <script src="js/timeline-i18n.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

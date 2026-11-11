@@ -1,0 +1,7 @@
+node_modules/
+cloudflared.exe
+*.log
+.env
+silkway_tour.db
+data/*.db-wal
+data/*.db-shm

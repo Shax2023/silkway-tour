@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: silkway-tour
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node server.js
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        value: silkway_uzbekistan_admin_secret_key_2026_x89
+      - key: ADMIN_DEFAULT_USER
+        value: admin
+      - key: ADMIN_DEFAULT_PASS
+        value: admin123
